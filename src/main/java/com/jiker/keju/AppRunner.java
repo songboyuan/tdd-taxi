@@ -32,7 +32,7 @@ public class AppRunner {
         tests = input.split("\n");
         for (String test : tests) {
             double price = calculator.getPrice(parser.getDistance(test), parser.getWaitTime(test));
-            receipt += "收费" + Math.round(price) + "\n";
+            receipt += "收费" + Math.round(price) + "元\n";
         }
         return receipt;
     }
