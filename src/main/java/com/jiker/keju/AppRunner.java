@@ -9,7 +9,10 @@ public class AppRunner {
 
     public static void main(String[] args) {
         String testDataFile = args[0];
-        String receipt = getReceipt(testDataFile);
+        String receipt = "";
+        if(testDataFile != null && testDataFile.length() > 0) {
+            receipt = getReceipt(testDataFile);
+        }
         System.out.println(receipt);
     }
 
