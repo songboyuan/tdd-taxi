@@ -8,12 +8,14 @@ import java.io.InputStream;
 public class AppRunner {
 
     public static void main(String[] args) {
-        String testDataFile = args[0];
         String receipt = "";
-        if(testDataFile != null && testDataFile.length() > 0) {
-            receipt = getReceipt(testDataFile);
+        if(args != null && args.length != 0) {
+            String testDataFile = args[0];
+            if (testDataFile != null && testDataFile.length() > 0) {
+                receipt = getReceipt(testDataFile);
+            }
+            System.out.println(receipt);
         }
-        System.out.println(receipt);
     }
 
     private static String getReceipt(String  fileName) {
