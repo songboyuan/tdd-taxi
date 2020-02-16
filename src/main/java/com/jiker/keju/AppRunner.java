@@ -7,10 +7,10 @@ import java.io.InputStream;
 
 public class AppRunner {
 
-    String testingFilePath;
-    String receipt;
+    static String testingFilePath;
+    static String receipt;
 
-    public void main(String[] args) {
+    public static void main(String[] args) {
         if(args != null && args.length != 0 && args[0] != null && args[0].length() > 0) {
             testingFilePath = args[0];
             receipt = getReceipt();
@@ -18,11 +18,11 @@ public class AppRunner {
         }
     }
 
-    public String getReceipt() {
+    public static String getReceipt() {
         return getReceipt(testingFilePath);
     }
 
-    private String getReceipt(String  fileName) {
+    private static String getReceipt(String  fileName) {
         String receipt = "";
         String input = readInput(fileName);
         DistanceAndWaitParser parser = new DistanceAndWaitParser();
@@ -37,7 +37,7 @@ public class AppRunner {
         return receipt;
     }
 
-    private String readInput(String testDataFile) {
+    private static String readInput(String testDataFile) {
         ClassLoader classLoader = ClassLoader.getSystemClassLoader();
         byte[] buffer = new byte[1024];
         ByteArrayOutputStream testCases = new ByteArrayOutputStream();
