@@ -8,12 +8,10 @@ import java.io.InputStream;
 public class AppRunner {
 
     public static void main(String[] args) {
-        String receipt = "";
-        if(args != null && args.length != 0) {
+        String receipt;
+        if(args != null && args.length != 0 && args[0] != null && args[0].length() > 0) {
             String testDataFile = args[0];
-            if (testDataFile != null && testDataFile.length() > 0) {
-                receipt = getReceipt(testDataFile);
-            }
+            receipt = getReceipt(testDataFile);
             System.out.println(receipt);
         }
     }
@@ -25,16 +23,12 @@ public class AppRunner {
         TaxiPriceCalculator calculator = new TaxiPriceCalculator();
         String[] tests;
 
-        if (input.length() > 0) {
-            tests = input.split("\n");
-            if (tests.length > 0) {
-                for (String test : tests) {
-                    int distance = parser.getDistance(test);
-                    int wait = parser.getWaitTime(test);
-                    double price = calculator.getPrice(distance, wait);
-                    receipt += "收费" + Math.round(price) + "\n";
-                }
-            }
+        tests = input.split("\n");
+        for (String test : tests) {
+            int distance = parser.getDistance(test);
+            int wait = parser.getWaitTime(test);
+            double price = calculator.getPrice(distance, wait);
+            receipt += "收费" + Math.round(price) + "\n";
         }
 
         return receipt;
