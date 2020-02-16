@@ -5,9 +5,9 @@ import java.io.IOException;
 import java.io.InputStream;
 
 public class AppRunner {
-
     static DistanceAndWaitParser parser = new DistanceAndWaitParser();
     static TaxiPriceCalculator calculator = new TaxiPriceCalculator();
+    static ByteArrayOutputStream testCases = new ByteArrayOutputStream();
 
     public static void main(String[] args) {
         if (args != null && args.length >= 1) {
@@ -18,7 +18,6 @@ public class AppRunner {
 
     private static String getReceipt(String  fileName) {
         String receipt = "";
-
         String[] tests = getInputFromFile(fileName).split("\n");
         for (String test : tests) {
             double price = calculator.getPrice(parser.getDistance(test), parser.getWaitTime(test));
@@ -39,7 +38,6 @@ public class AppRunner {
 
     private static String readInput(String testDataFile) throws IOException {
         byte[] buffer = new byte[1024];
-        ByteArrayOutputStream testCases = new ByteArrayOutputStream();
         InputStream in = ClassLoader.getSystemClassLoader().getResourceAsStream(testDataFile);
         int length;
         while ((length = in.read(buffer)) != -1) {
@@ -48,4 +46,5 @@ public class AppRunner {
         String testsDescription  = testCases.toString("UTF-8");
         return testsDescription.trim();
     }
+
 }

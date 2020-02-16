@@ -1,32 +1,30 @@
 package com.jiker.keju;
 
 public class TaxiPriceCalculator {
-    final int BASE_PRICE = 6;
-    final int BASE_DISTANCE = 2;
-    final int LONG_DISTANCE = 8;
-    final double SHORT_DISTANCE_PRICE = 0.8;
-    final double LONG_DISTANCE_EXTRA_PRICE = SHORT_DISTANCE_PRICE * 0.5;
+    final int basePrice = 6;
+    final int baseDistance = 2;
+    final int longDistance = 8;
+    final double shortDistancePrice = 0.8;
+    final double longDistanceExtraPrice = shortDistancePrice * 0.5;
 
     double getPrice(int distance, int waitMinute) {
-
-        double price = BASE_PRICE + getPriceForOverBaseDistance(distance);
+        double price = basePrice + getPriceForOverBaseDistance(distance);
         price = price + getWaitPrice(waitMinute);
-
         return price;
     }
 
     private double getPriceForOverBaseDistance(int distance) {
         double price = 0;
-        if (distance > BASE_DISTANCE) {
-            price = (distance - BASE_DISTANCE) * SHORT_DISTANCE_PRICE + getPriceForLongDistance(distance);
+        if (distance > baseDistance) {
+            price = (distance - baseDistance) * shortDistancePrice + getPriceForLongDistance(distance);
         }
         return price;
     }
 
     private double getPriceForLongDistance(int distance) {
         double price = 0;
-        if (distance >= LONG_DISTANCE) {
-            price = (distance - LONG_DISTANCE) * LONG_DISTANCE_EXTRA_PRICE;
+        if (distance >= longDistance) {
+            price = (distance - longDistance) * longDistanceExtraPrice;
         }
         return price;
     }
