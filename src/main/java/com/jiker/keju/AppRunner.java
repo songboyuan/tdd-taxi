@@ -23,11 +23,13 @@ public class AppRunner {
         DistanceAndWaitParser parser = new DistanceAndWaitParser();
         TaxiPriceCalculator calculator = new TaxiPriceCalculator();
 
-        for(String test:tests) {
-            int distance = parser.getDistance(test);
-            int wait = parser.getWaitTime(test);
-            double price = calculator.getPrice(distance, wait);
-            receipt += "收费" + Math.round(price) + "\n";
+        if(tests != null && tests.length > 0) {
+            for (String test : tests) {
+                int distance = parser.getDistance(test);
+                int wait = parser.getWaitTime(test);
+                double price = calculator.getPrice(distance, wait);
+                receipt += "收费" + Math.round(price) + "\n";
+            }
         }
 
         return receipt;
