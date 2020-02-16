@@ -7,7 +7,7 @@ public class DistanceAndWaitParser {
     int getDistance(String description) {
         int distance = 0;
         String[] descriptionArray = description.split(",");
-        if(descriptionArray.length == 2) {
+        if (descriptionArray.length == 2) {
             distance = getNumberFromString(descriptionArray[0]);
         }
         return distance;
@@ -16,7 +16,7 @@ public class DistanceAndWaitParser {
     public int getWaitTime(String description) {
         int waitTime = 0;
         String[] descriptionArray = description.split(",");
-        if(descriptionArray.length == 2) {
+        if (descriptionArray.length == 2) {
             waitTime = getNumberFromString(descriptionArray[1]);
         }
         return waitTime;
@@ -24,11 +24,10 @@ public class DistanceAndWaitParser {
 
     int getNumberFromString(String discription) {
         String regEx = "[^0-9]";
-        Pattern p = Pattern.compile(regEx);
-        Matcher m = p.matcher(discription);
+        Matcher m = Pattern.compile(regEx).matcher(discription);
         String result = m.replaceAll("").trim();
         int number = 0;
-        if(result.length() > 0) {
+        if (result.length() > 0) {
             number = Integer.valueOf(result);
         }
         return number;
