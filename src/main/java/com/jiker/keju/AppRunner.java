@@ -16,7 +16,7 @@ public class AppRunner {
         }
     }
 
-    private static String getReceipt(String  fileName) {
+    public static String getReceipt(String  fileName) {
         String receipt = "";
         String input = readInput(fileName);
         DistanceAndWaitParser parser = new DistanceAndWaitParser();
