@@ -7,16 +7,22 @@ import java.io.InputStream;
 
 public class AppRunner {
 
-    public static void main(String[] args) {
-        String receipt;
+    String testingFilePath;
+    String receipt;
+
+    public void main(String[] args) {
         if(args != null && args.length != 0 && args[0] != null && args[0].length() > 0) {
-            String testDataFile = args[0];
-            receipt = getReceipt(testDataFile);
+            testingFilePath = args[0];
+            receipt = getReceipt();
             System.out.println(receipt);
         }
     }
 
-    public static String getReceipt(String  fileName) {
+    public String getReceipt() {
+        return getReceipt(testingFilePath);
+    }
+
+    private String getReceipt(String  fileName) {
         String receipt = "";
         String input = readInput(fileName);
         DistanceAndWaitParser parser = new DistanceAndWaitParser();
@@ -25,18 +31,13 @@ public class AppRunner {
 
         tests = input.split("\n");
         for (String test : tests) {
-            int distance = parser.getDistance(test);
-            int wait = parser.getWaitTime(test);
-            double price = calculator.getPrice(distance, wait);
+            double price = calculator.getPrice(parser.getDistance(test), parser.getWaitTime(test));
             receipt += "收费" + Math.round(price) + "\n";
         }
-
         return receipt;
-
     }
 
-
-    private static String readInput(String testDataFile) {
+    private String readInput(String testDataFile) {
         ClassLoader classLoader = ClassLoader.getSystemClassLoader();
         byte[] buffer = new byte[1024];
         ByteArrayOutputStream testCases = new ByteArrayOutputStream();
@@ -53,5 +54,4 @@ public class AppRunner {
         }
         return testsDescription.trim();
     }
-
 }
