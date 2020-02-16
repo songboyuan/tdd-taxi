@@ -19,16 +19,19 @@ public class AppRunner {
     private static String getReceipt(String  fileName) {
         String receipt = "";
         String input = readInput(fileName);
-        String[] tests = input.split("\n");
         DistanceAndWaitParser parser = new DistanceAndWaitParser();
         TaxiPriceCalculator calculator = new TaxiPriceCalculator();
+        String[] tests;
 
-        if(tests != null && tests.length > 0) {
-            for (String test : tests) {
-                int distance = parser.getDistance(test);
-                int wait = parser.getWaitTime(test);
-                double price = calculator.getPrice(distance, wait);
-                receipt += "收费" + Math.round(price) + "\n";
+        if (input.length() > 0) {
+            tests = input.split("\n");
+            if (tests.length > 0) {
+                for (String test : tests) {
+                    int distance = parser.getDistance(test);
+                    int wait = parser.getWaitTime(test);
+                    double price = calculator.getPrice(distance, wait);
+                    receipt += "收费" + Math.round(price) + "\n";
+                }
             }
         }
 
@@ -52,7 +55,7 @@ public class AppRunner {
         } catch (IOException e) {
             System.out.println(e.getLocalizedMessage());
         }
-        return testsDescription;
+        return testsDescription.trim();
     }
 
 }
